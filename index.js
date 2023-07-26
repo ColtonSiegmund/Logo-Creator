@@ -1,11 +1,14 @@
 const inquirer = require('inquirer');
+const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt');
+inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 
 inquirer
   .prompt([
     {
-      type: 'input',
+      type: 'maxlength-input',
       message: 'What three characters would you like your logo to have?',
       name: 'characters',
+      maxLength: 3,
     },
     {
       type: 'input',
@@ -25,7 +28,5 @@ inquirer
     },
   ])
   .then((response) =>
-    response.confirm === response.password
-      ? console.log('Success!')
-      : console.log('You forgot your password already?!')
+      console.log('Generated logo.svg')
   );

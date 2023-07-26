@@ -31,6 +31,7 @@
     "ieee754": "^1.2.1",
     "inherits": "^2.0.4",
     "inquirer": "^8.2.4",
+    "inquirer-maxlength-input-prompt": "^1.0.2",
     "is-fullwidth-code-point": "^3.0.0",
     "is-interactive": "^1.0.0",
     "is-unicode-supported": "^0.1.0",
