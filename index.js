@@ -1,15 +1,20 @@
 const inquirer = require('inquirer');
-const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt');
-const shapes = require('./library/shapes')
-inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
+// const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt');
+const { Square, Circle, Triangle} = require('./library/shapes');
+const SVG = require('./library/svg');
+// inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt);
+const { writeFile } = require('fs/promises');
 
-inquirer
+function init(){
+return inquirer
   .prompt([
     {
-      type: 'maxlength-input',
+      type: 'input',
       message: 'What three characters would you like your logo to have?',
-      name: 'characters',
-      maxLength: 3,
+      name: 'text',
+      validate: (text) => {
+        text.length <= 3 || "Logo must have a maximum of 3 characters"
+      }
     },
     {
       type: 'input',
@@ -19,8 +24,8 @@ inquirer
     {
       type: 'list',
       message: 'Which shape would you like your logo to be?',
-      name: 'shape',
-      choices: ["Circle", "Square", "Triangle"]
+      name: 'shapeType',
+      choices: ["circle", "square", "triangle"]
     },
     {
       type: 'input',
@@ -28,6 +33,33 @@ inquirer
       name: 'shapeColor',
     },
   ])
-  .then((response) =>
-      console.log('Generated logo.svg')
-  );
+  .then(({text, textColor, shapeType, shapeColor}) => {
+    let shape;
+    switch (shapeType) {
+      case "circle":
+        shape = new Circle();
+        break;
+      case "square":
+        shape = new Square();
+        break;
+      default:
+        shape = new Triangle();
+        break;
+    }
+    shape.setColor(shapeColor);
+    const svg = new SVG();
+    svg.setText(text, textColor);
+    svg.setShape(shape);
+      return writeFile("logo.svg", svg.render());
+    
+  })
+  .then(() =>{
+    console.log("Logo created!");
+  })
+  .catch ((error) => {
+    console.log(error);
+    console.log("Error!");
+  });
+}
+
+init();
