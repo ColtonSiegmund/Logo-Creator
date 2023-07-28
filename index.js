@@ -9,12 +9,10 @@ function init(){
 return inquirer
   .prompt([
     {
-      type: 'input',
+      type: 'maxlength-input',
       message: 'What three characters would you like your logo to have?',
       name: 'text',
-      validate: (text) => {
-        text.length <= 3 || "Logo must have a maximum of 3 characters"
-      }
+      maxLength: 3
     },
     {
       type: 'input',
@@ -48,13 +46,13 @@ return inquirer
     }
     shape.setColor(shapeColor);
     const svg = new SVG();
-    svg.setText(text, textColor);
     svg.setShape(shape);
+    svg.setText(text, textColor);
       return writeFile("logo.svg", svg.render());
     
   })
   .then(() =>{
-    console.log("Logo created!");
+    console.log("Generated logo.svg");
   })
   .catch ((error) => {
     console.log(error);
