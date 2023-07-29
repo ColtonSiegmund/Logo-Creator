@@ -1,10 +1,12 @@
+// requiring our shapes and SVG to render the shapes, inquirer for the prompts, fs promises to write the file and inquirer max length to constrict the input to 3 characters.
 const inquirer = require('inquirer');
-// const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt');
+const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt');
 const { Square, Circle, Triangle} = require('./library/shapes');
 const SVG = require('./library/svg');
-// inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt);
+inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt);
 const { writeFile } = require('fs/promises');
 
+// inquirer prompt to gather user's input
 function init(){
 return inquirer
   .prompt([
@@ -31,6 +33,7 @@ return inquirer
       name: 'shapeColor',
     },
   ])
+  // function to render the shape, text, color and console.log wether it was successful or not
   .then(({text, textColor, shapeType, shapeColor}) => {
     let shape;
     switch (shapeType) {
@@ -59,5 +62,5 @@ return inquirer
     console.log("Error!");
   });
 }
-
+// calling the function
 init();

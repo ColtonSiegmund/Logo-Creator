@@ -1,3 +1,5 @@
+
+// our class to render the final svg string with the text and shape input.
 class SVG {
   constructor() {
     this.logoText = "";
@@ -17,5 +19,5 @@ setShape(shape){
   this.logoShape = shape.render()
 }
 }
-
+// exporting the function
 module.exports = SVG;
