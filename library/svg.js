@@ -5,7 +5,7 @@ class SVG {
   
   }
   render() {
-    return `<svg width="300" height="300">${this.logoShape}${this.logoText}</svg>` 
+    return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300">${this.logoShape}${this.logoText}</svg>` 
 }
 setText(message, color) {
   if (message.length > 3){
