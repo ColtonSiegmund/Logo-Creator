@@ -15,6 +15,8 @@
 
 <svg width="310" height="200"><polygon points="170,0 350,250 20,210" fill="Blue" /><text x="165" y="160" font-size="60" text-anchor="middle" fill="Green">CSS</text></svg>
 
+![Screenshot 1](./assets/Screenshot%202023-07-29%20at%2011.02.41%20AM.png)
+
   ## Table of Contents
   -[Installation](#installation)
 
